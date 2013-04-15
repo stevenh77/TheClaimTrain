@@ -1,0 +1,9 @@
+CREATE TABLE [dbo].[Company]
+(
+[Id] [int] NOT NULL IDENTITY(1, 1),
+[Name] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+[Url] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Company] ADD CONSTRAINT [PK__tmp_ms_x__3214EC07AD9733E0] PRIMARY KEY CLUSTERED  ([Id]) ON [PRIMARY]
+GO

@@ -1,0 +1,120 @@
+/**
+ * Appcropolis Template: homepage 
+ * @copy Appcropolis LLC (c) 2011-2013. All rights reserved.
+ * @author stevenh77 (support@appcropolis.com)
+ * @date 2013-04-14
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+ * BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN 
+ * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN 
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
+ * SOFTWARE.
+ *
+ * License and legal information: 
+ *
+ * http://appcropolis.com/license/
+ * http://appcropolis.com/legal/
+ * http://appcropolis.com/privacy/
+ */
+
+
+/* global */
+
+
+
+/* header */
+/* part header */
+#homepage div[data-role="header"] {
+	/* some rules */
+	}
+	
+	#homepage div[data-role="header"] > div {
+		padding: 18px 0 0 0;
+		width: 100%;
+		text-align: center;
+		display: block;
+		margin: 0;
+		height: 62px;
+		}
+		
+	
+/* customize header */
+#homepage div[data-role="header"].ui-header {
+	border-bottom: 1px solid #222;
+	background-color: #303030;
+	background-image: none;
+	/*
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#727272),to(#333));
+	background-image: -webkit-linear-gradient(#727272,#333);
+	background-image: -moz-linear-gradient(#727272,#333);
+	background-image: -ms-linear-gradient(#727272,#333);
+	background-image: -o-linear-gradient(#727272,#333);
+	background-image: linear-gradient(#727272,#333);
+	*/
+	}
+
+
+/* subheader */
+
+
+
+/* content */
+/* part: content */
+#homepage div[data-role="content"] {
+	/* some rules */
+	}
+
+
+
+/* customize listview */
+#homepage div[data-role="content"] .ui-li {
+	}
+	#livingsocial-home .ui-li .ui-btn-inner {
+		border-color: rgba(255, 255, 255, .2);
+		border-bottom: rgba(0, 0, 0, .3) solid 1px;
+		}
+
+#homepage div[data-role="content"] .ui-li-heading {
+	font-size: 22px;
+	line-height: 150%;
+	font-weight: normal;
+	margin-left: -25px;
+	font-family: "arial rounded mt bold", helvetica, arial, sans-serif;
+	letter-spacing: 1px;
+	}
+	#homepage div[data-role="content"] .ui-btn-up-l, 
+	#homepage div[data-role="content"] .ui-btn-hover-l {
+		background-color: #303030;
+		color: #eee;
+		}
+	#homepage div[data-role="content"] .ui-btn-up-l .ui-link-inherit,
+	#homepage div[data-role="content"] .ui-btn-hover-l .ui-li-heading,
+	#homepage div[data-role="content"] .ui-btn-hover-l .ui-li-heading {
+		color: #fff;
+		text-shadow: none;
+		}
+		
+		
+/* customize fonts */	
+#homepage div[data-role="content"] .ui-select .ui-btn-up-a, 
+#homepage div[data-role="content"] .ui-select .ui-btn-hover-a, 
+#homepage div[data-role="content"] .ui-select .ui-btn-down-a {
+	font-family: "arial rounded mt bold", helvetica, arial, sans-serif;
+	}
+	
+	
+/* customize the listview right-arrow */
+#homepage div[data-role="content"] .ui-icon-ls-arrow-r {
+	background-image: url(images/ls-arrow-r.png);
+	box-shadow: none; -webkit-box-shadow: none; -moz-box-shadow: none; 
+	border-radius: 0px; -webkit-border-radius: 0px; -moz-border-radius: 0px;
+	background-color: rgba(0, 0, 0, 0);
+	}
+
+
+
+/* footer */
+

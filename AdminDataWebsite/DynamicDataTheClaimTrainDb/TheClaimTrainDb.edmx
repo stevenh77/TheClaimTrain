@@ -1,0 +1,470 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TheClaimTrainDbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="TheClaimTrainDbModelStoreContainer">
+          <EntitySet Name="Claim" EntityType="TheClaimTrainDbModel.Store.Claim" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Company" EntityType="TheClaimTrainDbModel.Store.Company" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Compensation" EntityType="TheClaimTrainDbModel.Store.Compensation" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Duration" EntityType="TheClaimTrainDbModel.Store.Duration" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Format" EntityType="TheClaimTrainDbModel.Store.Format" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Person" EntityType="TheClaimTrainDbModel.Store.Person" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Title" EntityType="TheClaimTrainDbModel.Store.Title" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Claim_Company" Association="TheClaimTrainDbModel.Store.FK_Claim_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Claim" EntitySet="Claim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Claim_Person" Association="TheClaimTrainDbModel.Store.FK_Claim_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Claim" EntitySet="Claim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Compensation_Company" Association="TheClaimTrainDbModel.Store.FK_Compensation_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Compensation" EntitySet="Compensation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Compensation_Duration" Association="TheClaimTrainDbModel.Store.FK_Compensation_Duration">
+            <End Role="Duration" EntitySet="Duration" />
+            <End Role="Compensation" EntitySet="Compensation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Compensation_Format" Association="TheClaimTrainDbModel.Store.FK_Compensation_Format">
+            <End Role="Format" EntitySet="Format" />
+            <End Role="Compensation" EntitySet="Compensation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_Title" Association="TheClaimTrainDbModel.Store.FK_Person_Title">
+            <End Role="Title" EntitySet="Title" />
+            <End Role="Person" EntitySet="Person" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Claim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PersonId" Type="int" Nullable="false" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+          <Property Name="StationFrom" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="StationTo" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="ExpectedTime" Type="time" Nullable="false" />
+          <Property Name="ActualTime" Type="time" Nullable="false" />
+          <Property Name="TicketUrl" Type="varchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Url" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Compensation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+          <Property Name="DurationId" Type="int" Nullable="false" />
+          <Property Name="Percentage" Type="int" Nullable="false" />
+          <Property Name="FormatId" Type="int" Nullable="false" />
+          <Property Name="FinePrint" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Duration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Format">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TitleId" Type="int" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="Address1" Type="varchar" MaxLength="100" />
+          <Property Name="Address2" Type="varchar" MaxLength="100" />
+          <Property Name="Town" Type="varchar" MaxLength="100" />
+          <Property Name="County" Type="varchar" MaxLength="100" />
+          <Property Name="PostCode" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Title">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Claim_Company">
+          <End Role="Company" Type="TheClaimTrainDbModel.Store.Company" Multiplicity="1" />
+          <End Role="Claim" Type="TheClaimTrainDbModel.Store.Claim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Claim">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Claim_Person">
+          <End Role="Person" Type="TheClaimTrainDbModel.Store.Person" Multiplicity="1" />
+          <End Role="Claim" Type="TheClaimTrainDbModel.Store.Claim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Claim">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Compensation_Company">
+          <End Role="Company" Type="TheClaimTrainDbModel.Store.Company" Multiplicity="1" />
+          <End Role="Compensation" Type="TheClaimTrainDbModel.Store.Compensation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Compensation">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Compensation_Duration">
+          <End Role="Duration" Type="TheClaimTrainDbModel.Store.Duration" Multiplicity="1" />
+          <End Role="Compensation" Type="TheClaimTrainDbModel.Store.Compensation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Duration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Compensation">
+              <PropertyRef Name="DurationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Compensation_Format">
+          <End Role="Format" Type="TheClaimTrainDbModel.Store.Format" Multiplicity="1" />
+          <End Role="Compensation" Type="TheClaimTrainDbModel.Store.Compensation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Format">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Compensation">
+              <PropertyRef Name="FormatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Person_Title">
+          <End Role="Title" Type="TheClaimTrainDbModel.Store.Title" Multiplicity="0..1" />
+          <End Role="Person" Type="TheClaimTrainDbModel.Store.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Title">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="TitleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TheClaimTrainDbModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="TheClaimTrainDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Claims" EntityType="TheClaimTrainDbModel.Claim" />
+          <EntitySet Name="Companies" EntityType="TheClaimTrainDbModel.Company" />
+          <EntitySet Name="Compensations" EntityType="TheClaimTrainDbModel.Compensation" />
+          <EntitySet Name="Durations" EntityType="TheClaimTrainDbModel.Duration" />
+          <EntitySet Name="Formats" EntityType="TheClaimTrainDbModel.Format" />
+          <EntitySet Name="People" EntityType="TheClaimTrainDbModel.Person" />
+          <EntitySet Name="Titles" EntityType="TheClaimTrainDbModel.Title" />
+          <AssociationSet Name="FK_Claim_Company" Association="TheClaimTrainDbModel.FK_Claim_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Claim" EntitySet="Claims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Claim_Person" Association="TheClaimTrainDbModel.FK_Claim_Person">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Claim" EntitySet="Claims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Compensation_Company" Association="TheClaimTrainDbModel.FK_Compensation_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Compensation" EntitySet="Compensations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Compensation_Duration" Association="TheClaimTrainDbModel.FK_Compensation_Duration">
+            <End Role="Duration" EntitySet="Durations" />
+            <End Role="Compensation" EntitySet="Compensations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_Title" Association="TheClaimTrainDbModel.FK_Person_Title">
+            <End Role="Title" EntitySet="Titles" />
+            <End Role="Person" EntitySet="People" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Compensation_Format" Association="TheClaimTrainDbModel.FK_Compensation_Format">
+            <End Role="Format" EntitySet="Formats" />
+            <End Role="Compensation" EntitySet="Compensations" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Claim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="StationFrom" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="StationTo" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="ExpectedTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="ActualTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="TicketUrl" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Company" Relationship="TheClaimTrainDbModel.FK_Claim_Company" FromRole="Claim" ToRole="Company" />
+          <NavigationProperty Name="Person" Relationship="TheClaimTrainDbModel.FK_Claim_Person" FromRole="Claim" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Url" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Claims" Relationship="TheClaimTrainDbModel.FK_Claim_Company" FromRole="Company" ToRole="Claim" />
+          <NavigationProperty Name="Compensations" Relationship="TheClaimTrainDbModel.FK_Compensation_Company" FromRole="Company" ToRole="Compensation" />
+        </EntityType>
+        <EntityType Name="Compensation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="DurationId" Type="Int32" Nullable="false" />
+          <Property Name="Percentage" Type="Int32" Nullable="false" />
+          <Property Name="FormatId" Type="Int32" Nullable="false" />
+          <Property Name="FinePrint" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Company" Relationship="TheClaimTrainDbModel.FK_Compensation_Company" FromRole="Compensation" ToRole="Company" />
+          <NavigationProperty Name="Duration" Relationship="TheClaimTrainDbModel.FK_Compensation_Duration" FromRole="Compensation" ToRole="Duration" />
+          <NavigationProperty Name="Format" Relationship="TheClaimTrainDbModel.FK_Compensation_Format" FromRole="Compensation" ToRole="Format" />
+        </EntityType>
+        <EntityType Name="Duration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Compensations" Relationship="TheClaimTrainDbModel.FK_Compensation_Duration" FromRole="Duration" ToRole="Compensation" />
+        </EntityType>
+        <EntityType Name="Format">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Compensations" Relationship="TheClaimTrainDbModel.FK_Compensation_Format" FromRole="Format" ToRole="Compensation" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TitleId" Type="Int32" />
+          <Property Name="FirstName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Address1" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Address2" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Town" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="County" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="PostCode" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Claims" Relationship="TheClaimTrainDbModel.FK_Claim_Person" FromRole="Person" ToRole="Claim" />
+          <NavigationProperty Name="Title" Relationship="TheClaimTrainDbModel.FK_Person_Title" FromRole="Person" ToRole="Title" />
+        </EntityType>
+        <EntityType Name="Title">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="People" Relationship="TheClaimTrainDbModel.FK_Person_Title" FromRole="Title" ToRole="Person" />
+        </EntityType>
+        <Association Name="FK_Claim_Company">
+          <End Role="Company" Type="TheClaimTrainDbModel.Company" Multiplicity="1" />
+          <End Role="Claim" Type="TheClaimTrainDbModel.Claim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Claim">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Claim_Person">
+          <End Role="Person" Type="TheClaimTrainDbModel.Person" Multiplicity="1" />
+          <End Role="Claim" Type="TheClaimTrainDbModel.Claim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Claim">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Compensation_Company">
+          <End Role="Company" Type="TheClaimTrainDbModel.Company" Multiplicity="1" />
+          <End Role="Compensation" Type="TheClaimTrainDbModel.Compensation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Compensation">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Compensation_Duration">
+          <End Role="Duration" Type="TheClaimTrainDbModel.Duration" Multiplicity="1" />
+          <End Role="Compensation" Type="TheClaimTrainDbModel.Compensation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Duration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Compensation">
+              <PropertyRef Name="DurationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Person_Title">
+          <End Role="Title" Type="TheClaimTrainDbModel.Title" Multiplicity="0..1" />
+          <End Role="Person" Type="TheClaimTrainDbModel.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Title">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="TitleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Compensation_Format">
+          <End Type="TheClaimTrainDbModel.Format" Role="Format" Multiplicity="1" />
+          <End Type="TheClaimTrainDbModel.Compensation" Role="Compensation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Format">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Compensation">
+              <PropertyRef Name="FormatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TheClaimTrainDbModelStoreContainer" CdmEntityContainer="TheClaimTrainDbEntities">
+          <EntitySetMapping Name="Claims">
+            <EntityTypeMapping TypeName="TheClaimTrainDbModel.Claim">
+              <MappingFragment StoreEntitySet="Claim">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="StationFrom" ColumnName="StationFrom" />
+                <ScalarProperty Name="StationTo" ColumnName="StationTo" />
+                <ScalarProperty Name="ExpectedTime" ColumnName="ExpectedTime" />
+                <ScalarProperty Name="ActualTime" ColumnName="ActualTime" />
+                <ScalarProperty Name="TicketUrl" ColumnName="TicketUrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="TheClaimTrainDbModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Compensations">
+            <EntityTypeMapping TypeName="TheClaimTrainDbModel.Compensation">
+              <MappingFragment StoreEntitySet="Compensation">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="DurationId" ColumnName="DurationId" />
+                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+                <ScalarProperty Name="FormatId" ColumnName="FormatId" />
+                <ScalarProperty Name="FinePrint" ColumnName="FinePrint" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Durations">
+            <EntityTypeMapping TypeName="TheClaimTrainDbModel.Duration">
+              <MappingFragment StoreEntitySet="Duration">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Formats">
+            <EntityTypeMapping TypeName="TheClaimTrainDbModel.Format">
+              <MappingFragment StoreEntitySet="Format">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="TheClaimTrainDbModel.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TitleId" ColumnName="TitleId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Town" ColumnName="Town" />
+                <ScalarProperty Name="County" ColumnName="County" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Titles">
+            <EntityTypeMapping TypeName="TheClaimTrainDbModel.Title">
+              <MappingFragment StoreEntitySet="Title">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
